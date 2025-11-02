@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="col-md-6">
+    <div class="card p-3 shadow-sm border-0 mb-3">
+      <h5 class="mb-3">Új pénztárca</h5>
+      <input class="form-control mb-2" [(ngModel)]="name" placeholder="Név">
+      <input class="form-control mb-2" type="number" [(ngModel)]="balance" placeholder="Egyenleg">
+      <button class="btn btn-success" (click)="add()">Hozzáadás</button>
+    </div>
+    <div *ngIf="wallets.length===0" class="text-muted">Nincsenek pénztárcák.</div>
+    <ul class="list-group">
+      <li *ngFor="let w of wallets" class="list-group-item d-flex justify-content-between align-items-center">
+        <div><strong>{{w.name}}</strong><div class="small text-muted">Egyenleg: {{w.balance}} Ft</div></div>
+        <div><button class="btn btn-sm btn-danger" (click)="remove(w.id)">Törlés</button></div>
+      </li>
+    </ul>
+  </div>
+  <div class="col-md-6">
+    <div class="card p-3 shadow-sm border-0">
+      <h5>Összegzés</h5>
+      <p>Számlák száma: <strong>{{wallets.length}}</strong></p>
+    </div>
+  </div>
+</div>

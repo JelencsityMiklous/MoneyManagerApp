@@ -1,0 +1,18 @@
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <div class="card p-4 shadow-sm border-0">
+      <h3 class="mb-3">Bejelentkezés</h3>
+      <form (ngSubmit)="onLogin()" #f="ngForm">
+        <div class="mb-3">
+          <label class="form-label">E-mail</label>
+          <input class="form-control" name="email" [(ngModel)]="email" required type="email">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Jelszó</label>
+          <input class="form-control" name="password" [(ngModel)]="password" required type="password">
+        </div>
+        <button class="btn btn-primary w-100" [disabled]="f.invalid">Bejelentkezés</button>
+      </form>
+    </div>
+  </div>
+</div>

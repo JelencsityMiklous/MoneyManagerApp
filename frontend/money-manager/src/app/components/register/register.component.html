@@ -1,0 +1,26 @@
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <div class="card p-4 shadow-sm border-0">
+      <h3 class="mb-3">Regisztráció</h3>
+      <form (ngSubmit)="onSubmit()" #f="ngForm">
+        <div class="mb-3">
+          <label class="form-label">Teljes név</label>
+          <input class="form-control" name="name" [(ngModel)]="name" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">E-mail</label>
+          <input class="form-control" name="email" [(ngModel)]="email" required type="email">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Jelszó</label>
+          <input class="form-control" name="password" [(ngModel)]="password" required type="password" minlength="6">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Jelszó ismét</label>
+          <input class="form-control" name="confirm" [(ngModel)]="confirm" required type="password">
+        </div>
+        <button class="btn btn-primary w-100" [disabled]="f.invalid">Regisztráció</button>
+      </form>
+    </div>
+  </div>
+</div>
