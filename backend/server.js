@@ -18,5 +18,9 @@ app.use(cors({
 app.use("/auth", authRouter);
 app.use("/", tablesRouter);
 
+app.get("/", (req, res) => {
+  res.json({ message: "MoneyManager backend fut!" });
+});
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => logger.info(`Backend fut: http://localhost:${PORT}`));
