@@ -1,0 +1,29 @@
+.auth-container {
+    max-width: 420px;
+    margin: 4rem auto;
+    padding: 2rem;
+    background: var(--surface);
+    border-radius: var(--radius);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    animation: fadeInUp 0.6s ease both;
+  }
+  .auth-container h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  .auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .auth-container .actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+  }
+  .auth-container a {
+    color: var(--accent);
+  }

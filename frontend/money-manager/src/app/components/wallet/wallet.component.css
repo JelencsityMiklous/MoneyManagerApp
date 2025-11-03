@@ -1,0 +1,27 @@
+.wallet-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+  .wallet-card {
+    background: var(--surface);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    transition: transform var(--transition);
+  }
+  .wallet-card:hover {
+    transform: translateY(-5px);
+    background: var(--surface-strong);
+  }
+  .wallet-card h3 {
+    margin-bottom: 0.3rem;
+    color: var(--text);
+  }
+  .wallet-card .balance {
+    font-size: 1.4rem;
+    font-weight: 600;
+  }
+  .wallet-card .positive { color: var(--success); }
+  .wallet-card .negative { color: var(--error); }
+  

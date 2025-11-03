@@ -1,28 +1,51 @@
-<div class="text-center mb-4">
-  <h1 class="display-5 fw-bold text-primary">Üdvözöl a MoneyManager!</h1>
-  <p class="lead text-muted">Könnyen kövesd a bevételeidet és kiadásaidat.</p>
-</div>
+<div class="home-container">
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Üdvözöl a <span class="gradient">MoneyManager</span></h1>
+      <p>Kezeld a pénzügyeidet okosan, egyszerűen és biztonságosan.  
+         Kövesd a bevételeidet és kiadásaidat egy letisztult, modern felületen.</p>
+      <div class="hero-actions">
+        <a routerLink="wallets"><button class="btn primary">Pénztárcák megtekintése</button></a>
+        <a routerLink="register" ><button class="btn ghost">Regisztráció</button></a>
+      </div>
+    </div>
+    <div class="hero-image">
+      <div class="glass-card balance">
+        <h3>Aktuális egyenleg</h3>
+        <h1>2 430 000 Ft</h1>
+        <p class="muted">Frissítve: ma 10:42</p>
+      </div>
+      <div class="glass-card summary">
+        <div class="summary-item">
+          <span class="positive">+ 245 000 Ft</span>
+          <p>Bevétel</p>
+        </div>
+        <div class="summary-item">
+          <span class="negative">− 178 000 Ft</span>
+          <p>Kiadás</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<div class="row g-4">
-  <div class="col-md-4">
-    <div class="card p-4 shadow-sm border-0 text-center">
-      <i class="bi bi-wallet2 fs-1 text-warning mb-2"></i>
-      <h5 class="fw-bold">Pénztárcák</h5>
-      <p class="text-muted">Kezeld külön a számláid és készpénzed.</p>
+  <section class="features">
+    <h2>Miért válassz minket?</h2>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <i class="material-icons">security</i>
+        <h3>Biztonság</h3>
+        <p>Banki szintű adatvédelem és titkosítás minden tranzakcióhoz.</p>
+      </div>
+      <div class="feature-card">
+        <i class="material-icons">insights</i>
+        <h3>Elemzések</h3>
+        <p>Okos statisztikák, hogy mindig tudd, mire megy el a pénzed.</p>
+      </div>
+      <div class="feature-card">
+        <i class="material-icons">devices</i>
+        <h3>Bárhol, bármikor</h3>
+        <p>Használd mobilon, tableten vagy gépen – mindig szinkronban marad.</p>
+      </div>
     </div>
-  </div>
-  <div class="col-md-4">
-    <div class="card p-4 shadow-sm border-0 text-center">
-      <i class="bi bi-graph-up fs-1 text-success mb-2"></i>
-      <h5 class="fw-bold">Statisztikák</h5>
-      <p class="text-muted">Grafikonon láthatod a kiadásokat.</p>
-    </div>
-  </div>
-  <div class="col-md-4">
-    <div class="card p-4 shadow-sm border-0 text-center">
-      <i class="bi bi-calendar-event fs-1 text-primary mb-2"></i>
-      <h5 class="fw-bold">Naptár nézet</h5>
-      <p class="text-muted">Tranzakciók dátum szerint.</p>
-    </div>
-  </div>
+  </section>
 </div>
