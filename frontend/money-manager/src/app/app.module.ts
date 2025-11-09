@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,6 +14,8 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { WalletComponent } from './components/wallet/wallet.component';
+import { StatisticsComponent } from './components/statistics/statistics.component';
+import { WalletChartComponent } from './components/wallet-chart/wallet-chart.component';
 
 @NgModule({
   declarations: [
@@ -23,16 +26,18 @@ import { WalletComponent } from './components/wallet/wallet.component';
     LoginComponent,
     RegisterComponent,
     ProfileComponent,
-    WalletComponent
+    WalletComponent,
+    StatisticsComponent,
+    WalletChartComponent,
+    
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
-  providers: [],
+  providers: [provideHttpClient()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
