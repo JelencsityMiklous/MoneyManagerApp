@@ -1,26 +1,11 @@
-<div class="row">
-  <div class="col-md-6">
-    <div class="card p-3 shadow-sm border-0 mb-3">
-      <h5 class="mb-3">Új pénztárca</h5>
-      <input class="form-control mb-2" [(ngModel)]="name" placeholder="Név">
-      <input class="form-control mb-2" type="number" [(ngModel)]="balance" placeholder="Egyenleg">
-      <button class="btn btn-success" (click)="add()">Hozzáadás</button>
-    </div>
-    <div *ngIf="wallets.length===0" class="text-muted">Nincsenek pénztárcák.</div>
-    <ul class="list-group">
-      <li *ngFor="let w of wallets" class="list-group-item d-flex justify-content-between align-items-center">
-        <div><strong>{{w.name}}</strong><div class="small text-muted">Egyenleg: {{w.balance}} Ft</div></div>
-        <div><button class="btn btn-sm btn-danger" (click)="remove(w.id)">Törlés</button></div>
-      </li>
-    </ul>
-  </div>
-  <div class="col-md-6">
-    <div class="card p-3 shadow-sm border-0">
-      <h5>Összegzés</h5>
-      <p>Számlák száma: <strong>{{wallets.length}}</strong></p>
-    </div>
+<div class="card p-3 shadow-sm">
+  <h3>Pénztárca</h3>
+  <p>Állapot: <strong *ngIf="auth.getCurrentUser(); else guest">Bejelentkezett</strong><ng-template #guest><strong>Vendég / Nem bejelentkezett</strong></ng-template></p>
+  <div class="row">
+    <div class="col-md-4"><div class="stat">Összeg<br><strong>{{wallet.balance}} Ft</strong></div></div>
+    <div class="col-md-4"><div class="stat">Bevétel<br><strong>{{wallet.income}} Ft</strong></div></div>
+    <div class="col-md-4"><div class="stat">Kiadás<br><strong>-{{ wallet.expense }} Ft</strong>
   </div>
 </div>
-<h2 style="margin-top: 50px; text-align: center;">Pénztárcák statisztikái</h2>
-<br>
-<app-wallet-chart></app-wallet-chart>
+
+</div>

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -8,6 +9,16 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
   email=''; password='';
-  constructor(private router: Router) {}
-  onLogin(){ if(this.email && this.password){ localStorage.setItem('mm_user', this.email); this.router.navigate(['/']); } else alert('Add meg a mezőket!'); }
+  constructor(private router: Router, private auth: AuthService) {}
+  onLogin(){
+    if(this.email && this.password){
+      const res = this.auth.login(this.email, this.password);
+      if(res.success){
+        alert(res.message);
+        this.router.navigate(['/']);
+      } else {
+        alert(res.message);
+      }
+    } else alert('Add meg a mezőket!');
+  }
 }

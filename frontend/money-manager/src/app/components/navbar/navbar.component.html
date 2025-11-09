@@ -7,11 +7,27 @@
     <div class="collapse navbar-collapse" id="nav">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item"><a routerLink="/" class="nav-link">Főoldal</a></li>
-        <li class="nav-item"><a routerLink="/wallets" class="nav-link">Pénztárcák</a></li>
-        <li class="nav-item"><a routerLink="/statistics" class="nav-link">Statisztika</a></li>
-        <li class="nav-item"><a routerLink="/profile" class="nav-link">Profil</a></li>
-        <li class="nav-item"><a routerLink="/login" class="nav-link">Bejelentkezés</a></li>
-        <li class="nav-item"><a routerLink="/register" class="nav-link">Regisztráció</a></li>
+
+        <!-- Pénztárcák csak bejelentkezettnek -->
+        <li class="nav-item" *ngIf="auth.getCurrentUser()"><a routerLink="/wallets" class="nav-link">Pénztárcák</a></li>
+
+        <!-- Profil csak bejelentkezettnek -->
+        <li class="nav-item" *ngIf="auth.getCurrentUser()"><a routerLink="/profile" class="nav-link">Profil</a></li>
+
+                <li class="nav-item"><a routerLink="/statistics" class="nav-link">Statisztika</a></li>
+
+        <!-- Szerezni / Bukni mindig elérhető -->
+        <!-- Admin link -->
+        <li class="nav-item" *ngIf="auth.getCurrentUser() && auth.getCurrentUser().isAdmin"><a routerLink="/admin" class="nav-link">Admin</a></li>
+
+        <li class="nav-item"><a routerLink="/game" class="nav-link">Játék</a></li>
+
+        <!-- Ha nincs bejelentkezve: regisztráció és bejelentkezés -->
+        <li class="nav-item" *ngIf="!auth.getCurrentUser()"><a routerLink="/register" class="nav-link">Regisztráció</a></li>
+        <li class="nav-item" *ngIf="!auth.getCurrentUser()"><a routerLink="/login" class="nav-link">Bejelentkezés</a></li>
+
+        <!-- Ha bejelentkezve: kijelentkezés -->
+        <li class="nav-item" *ngIf="auth.getCurrentUser()"><a (click)='logout()' class="nav-link" style="cursor:pointer">Kijelentkezés</a></li>
       </ul>
     </div>
   </div>

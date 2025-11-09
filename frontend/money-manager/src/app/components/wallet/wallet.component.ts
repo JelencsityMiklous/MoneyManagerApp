@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
-interface Wallet { id:number; name:string; balance:number; }
+import { TransactionService } from '../../services/transaction.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-wallet',
@@ -8,11 +8,12 @@ interface Wallet { id:number; name:string; balance:number; }
   styleUrls: ['./wallet.component.css']
 })
 export class WalletComponent implements OnInit {
-  wallets: Wallet[] = [];
-  name=''; balance=0;
-  ngOnInit(){ this.load(); }
-  load(){ const raw=localStorage.getItem('mm_wallets'); this.wallets = raw? JSON.parse(raw): []; }
-  save(){ localStorage.setItem('mm_wallets', JSON.stringify(this.wallets)); }
-  add(){ if(!this.name) return; const id = this.wallets.length? Math.max(...this.wallets.map(w=>w.id))+1:1; this.wallets.push({id, name:this.name, balance:+this.balance}); this.name=''; this.balance=0; this.save(); }
-  remove(id:number){ this.wallets = this.wallets.filter(w=>w.id!==id); this.save(); }
+  wallet:any = { balance:0, income:0, expense:0 };
+  amount=0;
+  constructor(private tx: TransactionService, public auth: AuthService,
+      
+  ) {}
+  ngOnInit(){ this.wallet = this.tx.getWallet(); }
+  add(){ if(this.amount>0){ this.tx.add(this.amount); this.wallet = this.tx.getWallet(); this.amount=0; } }
+  spend(){ if(this.amount>0){ this.tx.spend(this.amount); this.wallet = this.tx.getWallet(); this.amount=0; } }
 }

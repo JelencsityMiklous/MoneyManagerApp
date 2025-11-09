@@ -1,27 +1,28 @@
 <div class="home-container">
   <section class="hero">
     <div class="hero-text">
-      <h1>Üdvözöl a <span class="gradient">MoneyManager Teszt</span></h1>
+      <h1>Üdvözöl a <span class="gradient">MoneyManager</span></h1>
       <p>Kezeld a pénzügyeidet okosan, egyszerűen és biztonságosan.  
          Kövesd a bevételeidet és kiadásaidat egy letisztult, modern felületen.</p>
       <div class="hero-actions">
         <a routerLink="wallets"><button class="btn primary">Pénztárcák megtekintése</button></a>
-        <a routerLink="register" ><button class="btn ghost">Regisztráció</button></a>
+         <a *ngIf="!authService.isLoggedIn" routerLink="/register"><button class="btn ghost">Regisztráció</button></a>
+
       </div>
     </div>
     <div class="hero-image">
       <div class="glass-card balance">
         <h3>Aktuális egyenleg</h3>
-        <h1>2 430 000 Ft</h1>
-        <p class="muted">Frissítve: ma 10:42</p>
+        <h1><p>{{ balance }} Ft</p></h1>
+        <p class="muted">Idő: {{ currentTime }}</p>
       </div>
       <div class="glass-card summary">
         <div class="summary-item">
-          <span class="positive">+ 245 000 Ft</span>
+          <span class="positive">{{ income }} Ft</span>
           <p>Bevétel</p>
         </div>
         <div class="summary-item">
-          <span class="negative">− 178 000 Ft</span>
+          <span class="negative">{{ expense }}Ft</span>
           <p>Kiadás</p>
         </div>
       </div>

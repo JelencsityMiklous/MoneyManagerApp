@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-profile',
@@ -6,6 +7,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  email='';
-  ngOnInit(){ this.email = localStorage.getItem('mm_user') || 'Vendég'; }
+  user: any;
+  newPassword: string = '';
+
+  constructor(private authService: AuthService) {}
+
+  ngOnInit(): void {
+    this.user = this.authService.getCurrentUser();
+  }
+
+  updateProfile() {
+    if (this.newPassword.trim()) {
+      this.authService.updatePassword(this.newPassword);
+      this.newPassword = '';
+      alert('✅ Jelszó frissítve!');
+    }
+    this.authService.updateName(this.user.name);
+    alert('✅ Név frissítve!');
+  }
 }
