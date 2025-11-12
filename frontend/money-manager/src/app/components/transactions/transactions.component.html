@@ -1,0 +1,22 @@
+<div class="container mt-4">
+  <h2>💰 Tranzakciók</h2>
+
+  <table class="table table-striped mt-3">
+    <thead>
+      <tr>
+        <th>Típus</th>
+        <th>Összeg (Ft)</th>
+        <th>Dátum</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let t of transactions">
+        <td [class.text-success]="t.type === 'income'" [class.text-danger]="t.type === 'expense'">
+          {{ t.type === 'income' ? 'Bevétel' : 'Kiadás' }}
+        </td>
+        <td>{{ t.amount }}</td>
+        <td>{{ t.date }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

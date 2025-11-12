@@ -1,22 +1,16 @@
-<div class="card p-3 shadow-sm">
-  <h3>Admin felület</h3>
-  <p>Itt kezelheted a felhasználókat (teszt/demo környezet)</p>
-  <table class="table">
-    <thead><tr><th>ID</th><th>Név</th><th>E-mail</th><th>Admin</th><th>Balance</th><th>Bevétel</th><th>Kiadás</th><th>Műveletek</th></tr></thead>
+<div class="admin-container">
+  <h2>Admin felület</h2>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Felhasználónév</th>
+        <th>Admin</th>
+      </tr>
+    </thead>
     <tbody>
       <tr *ngFor="let u of users">
-        <td>{{u.id}}</td>
-        <td>{{u.name}}</td>
-        <td>{{u.email}}</td>
-        <td>{{u.isAdmin ? 'Igen' : 'Nem'}}</td>
-        <td>{{u.wallet?.balance || 0}} Ft</td>
-        <td>{{u.wallet?.income || 0}} Ft</td>
-        <td>{{u.wallet?.expense || 0}} Ft</td>
-        <td>
-          <button class="btn btn-sm btn-outline-danger me-1" (click)="deleteUser(u)">Törlés</button>
-          <button class="btn btn-sm btn-outline-secondary me-1" (click)="resetWallet(u)">Reset</button>
-          <button class="btn btn-sm btn-outline-primary" (click)="toggleAdmin(u)">{{u.isAdmin ? 'Eltávolít admin' : 'Adj admin jogot'}}</button>
-        </td>
+        <td>{{ u.username }}</td>
+        <td>{{ u.isAdmin ? '✔️' : '❌' }}</td>
       </tr>
     </tbody>
   </table>

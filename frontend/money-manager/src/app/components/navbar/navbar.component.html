@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
   <div class="container-fluid">
-    <a class="navbar-brand fw-bold" routerLink="/">💰 MoneyManager</a>
+    <a class="navbar-brand fw-bold" routerLink="/">MoneyManager</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -15,12 +15,12 @@
         <li class="nav-item" *ngIf="auth.getCurrentUser()"><a routerLink="/profile" class="nav-link">Profil</a></li>
 
                 <li class="nav-item"><a routerLink="/statistics" class="nav-link">Statisztika</a></li>
+                 <li class="nav-item"><a routerLink="/transactions" class="nav-link">Tranzakciók</a></li>
 
         <!-- Szerezni / Bukni mindig elérhető -->
         <!-- Admin link -->
         <li class="nav-item" *ngIf="auth.getCurrentUser() && auth.getCurrentUser().isAdmin"><a routerLink="/admin" class="nav-link">Admin</a></li>
 
-        <li class="nav-item"><a routerLink="/game" class="nav-link">Játék</a></li>
 
         <!-- Ha nincs bejelentkezve: regisztráció és bejelentkezés -->
         <li class="nav-item" *ngIf="!auth.getCurrentUser()"><a routerLink="/register" class="nav-link">Regisztráció</a></li>

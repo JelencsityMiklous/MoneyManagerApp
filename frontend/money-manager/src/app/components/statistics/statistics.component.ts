@@ -1,61 +1,60 @@
-import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
-import { Chart, registerables } from 'chart.js';
-import { StatisticsService } from '../../services/statistics.service';
-
-Chart.register(...registerables);
+import { Component, AfterViewInit } from '@angular/core';
+import { WalletService } from '../../services/wallet.service';
+import Chart from 'chart.js/auto';
 
 @Component({
   selector: 'app-statistics',
-  templateUrl: './statistics.component.html'
+  templateUrl: './statistics.component.html',
+  styleUrls: ['./statistics.component.css']
 })
-export class StatisticsComponent implements OnInit, AfterViewInit {
+export class StatisticsComponent implements AfterViewInit {
+  chart: any;
 
-  @ViewChild('transactionChart') chartRef!: ElementRef<HTMLCanvasElement>;
-  chart!: Chart;
-  transactions: any[] = [];
+  constructor(private walletService: WalletService) {}
 
-  viewReady = false;
-  dataReady = false;
-
-  constructor(private statisticsService: StatisticsService) {}
-
-  ngOnInit() {
-    this.statisticsService.getStatistics().subscribe(data => {
-      console.log("DATA LOADED:", data);
-      this.transactions = data;
-      this.dataReady = true;
-      this.tryRenderChart();
-    });
+  ngAfterViewInit(): void {
+    // Kis késleltetés, hogy a canvas biztosan készen legyen
+    setTimeout(() => {
+      this.renderChart();
+    }, 200);
   }
 
-  ngAfterViewInit() {
-    console.log("VIEW READY");
-    this.viewReady = true;
-    this.tryRenderChart();
-  }
+  renderChart(): void {
+    const income = this.walletService.getTotalIncome();
+    const expense = this.walletService.getTotalExpense();
 
-  tryRenderChart() {
-    console.log("DEBUG:", this.viewReady, this.dataReady, this.chartRef);
+    const ctx = document.getElementById('statsChart') as HTMLCanvasElement | null;
+    if (!ctx) return;
 
-    if (!this.viewReady || !this.dataReady || !this.chartRef) {
-      return;
-    }
+    if (this.chart) this.chart.destroy();
 
-    const labels = this.transactions.map(t =>
-  new Date(t.date).toISOString().split('T')[0]
-);
-    const incomes = this.transactions.map(t => t.amount > 0 ? t.amount : 0);
-    const expenses = this.transactions.map(t => t.amount < 0 ? Math.abs(t.amount) : 0);
-
-    this.chart = new Chart(this.chartRef.nativeElement, {
+    this.chart = new Chart(ctx, {
       type: 'bar',
       data: {
-        labels,
+        labels: ['Bevétel', 'Kiadás'],
         datasets: [
-          { label: 'Bevétel', data: incomes, backgroundColor: 'green' },
-          { label: 'Kiadás', data: expenses, backgroundColor: 'red' }
+          {
+            label: 'Összeg (Ft)',
+            data: [income, expense],
+            backgroundColor: ['#28a745', '#dc3545']
+          }
         ]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: { display: true, text: 'Összeg (Ft)' }
+          }
+        },
+        plugins: {
+          legend: { display: false },
+          title: { display: true, text: 'Bevétel vs Kiadás' }
+        }
       }
     });
+
+    console.log('Statisztika kirajzolva:', { income, expense });
   }
 }

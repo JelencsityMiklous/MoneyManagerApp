@@ -1,11 +1,23 @@
-<div class="card p-3 shadow-sm">
-  <h3>Pénztárca</h3>
-  <p>Állapot: <strong *ngIf="auth.getCurrentUser(); else guest">Bejelentkezett</strong><ng-template #guest><strong>Vendég / Nem bejelentkezett</strong></ng-template></p>
-  <div class="row">
-    <div class="col-md-4"><div class="stat">Összeg<br><strong>{{wallet.balance}} Ft</strong></div></div>
-    <div class="col-md-4"><div class="stat">Bevétel<br><strong>{{wallet.income}} Ft</strong></div></div>
-    <div class="col-md-4"><div class="stat">Kiadás<br><strong>-{{ wallet.expense }} Ft</strong>
-  </div>
-</div>
+<div class="wallet-container">
+  <div class="wallet-card">
+    <h2>Pénztárca</h2>
+    <h3 class="balance">Egyenleg: 
+      <span [ngClass]="{ 'positive': wallet.balance >= 0, 'negative': wallet.balance < 0 }">
+        {{ wallet.balance | currency:'HUF' }}
+      </span>
+    </h3>
 
+    <div class="wallet-stats">
+      <p><span class="income-label">Bevétel:</span> {{ wallet.income | currency:'HUF' }}</p>
+      <p><span class="expense-label">Kiadás:</span> {{ wallet.expense | currency:'HUF' }}</p>
+    </div>
+
+    <div class="wallet-actions">
+      <input type="number" [(ngModel)]="amount" class="amount-input" placeholder="Összeg">
+      <div class="buttons">
+        <button (click)="addIncome()" class="btn btn-success">+ Bevétel</button>
+        <button (click)="addExpense()" class="btn btn-danger">- Kiadás</button>
+      </div>
+    </div>
+  </div>
 </div>

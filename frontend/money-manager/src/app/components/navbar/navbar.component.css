@@ -42,7 +42,11 @@
     color: #000;
     font-weight: 800;
   }
-  
+  .navbar-brand:hover{
+    color: gray;
+    transition: color 0.1s ease, background 0.25s ease;
+
+  }
   .nav-links {
     display: flex;
     align-items: center;
